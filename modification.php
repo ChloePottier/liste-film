@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
 <?php
 $userBdd ='root';
 $pass ='';
@@ -20,11 +32,11 @@ $sqlTitre = "SELECT titre FROM film WHERE id= $idFilm";
 $dbh->query($sqlTitre);
 //resultat de la requete
 $reqTitre = $dbh->query($sqlTitre);
-// echo $idFilm . " <input name='name' type='text' value='".$res."'  /><br />";
+//traiter le tableau : mettre le titre trouvé dans le input
 while($resTitre=$reqTitre->fetch(PDO::FETCH_ASSOC)){
     echo "<form method='POST' action='#'><input style = 'width: 300px;'name='titreModif' type='text' value='".$resTitre['titre']."'  /> <button type='submit' value='submit' name='modification'>Modifier</button></form>";
 };
-
+// si input est différent de vide alors
 if (!empty($_POST['titreModif'])){
     $titreModif = $_POST['titreModif'];
     $tab = array(
@@ -33,6 +45,7 @@ if (!empty($_POST['titreModif'])){
     $sqlModif = "UPDATE film SET titre='$titreModif' WHERE id=".$idFilm."";
     $reqModif = $dbh->prepare($sqlModif);
     $reqModif ->execute(array($sqlModif));
+    // si une modif est faite 
     if($reqModif == true){
         header("Location: index.php");; 
     
@@ -40,3 +53,4 @@ if (!empty($_POST['titreModif'])){
 }
 
 ?>
+<a href='index.php'>Annuler la modification</a>
