@@ -24,21 +24,19 @@ $reqTitre = $dbh->query($sqlTitre);
 while($resTitre=$reqTitre->fetch(PDO::FETCH_ASSOC)){
     echo "<form method='POST' action='#'><input style = 'width: 300px;'name='titreModif' type='text' value='".$resTitre['titre']."'  /> <button type='submit' value='submit' name='modification'>Modifier</button></form>";
 };
+
 if (!empty($_POST['titreModif'])){
+    $titreModif = $_POST['titreModif'];
     $tab = array(
         'id' => $idFilm,
         'titre'=>$titreModif);
+    $sqlModif = "UPDATE film SET titre='$titreModif' WHERE id=".$idFilm."";
+    $reqModif = $dbh->prepare($sqlModif);
+    $reqModif ->execute(array($sqlModif));
+    if($reqModif == true){
+        header("Location: index.php");; 
+    
+    }
 }
-// $sqlModif = "UPDATE film SET titre='$titreModif' WHERE id=".$idFilm."";
-
-
-// 
-// $sqlDelete = "DELETE  FROM `film` DELETE FROM `film` WHERE `id`= ? "
-
-// //exécute la requête SQL 
-// $dbh->query($sqlModif);
-// //resultat de la requete
-// $requete = $dbh->query($sqlModif);
-
 
 ?>
