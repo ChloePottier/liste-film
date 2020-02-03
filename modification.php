@@ -15,13 +15,15 @@ try {
 //variable id du film
 $idFilm = $_GET['filmid'];
 //la requête
-$sqlTitre = "SELECT titre FROM film WHERE id= $idFilm AND titre = $titreFilm";
+$sqlTitre = "SELECT titre FROM film WHERE id= $idFilm";
 //exécute la requête SQL 
 $dbh->query($sqlTitre);
 //resultat de la requete
 $reqTitre = $dbh->query($sqlTitre);
-$res = $reqTitre->fetch(PDO::FETCH_ASSOC);
-echo $idFilm . " <input name='name' type='text' value='".$res."'  /><br />";
+// echo $idFilm . " <input name='name' type='text' value='".$res."'  /><br />";
+while($resTitre=$reqTitre->fetch(PDO::FETCH_ASSOC)){
+    echo " <input style = 'width: 300px;'name='name' type='text' value='".$resTitre['titre']."'  /><br />";
+}
 
 // 
 // $sqlModif = "UPDATE `film` SET `id`=[value-1],`titre`=[value-2] "; 
