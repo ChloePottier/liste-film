@@ -20,7 +20,7 @@ $dbh->query($sqlDelete);
 $reqDelete = $dbh->query($sqlDelete);
 // traiter le tableau : mettre le titre trouvé dans le input
 if($reqDelete == true){
-    echo "Le film a bien été supprimé de la base de donnée";
+    header("Location: index.php");
 };
 
 ?>

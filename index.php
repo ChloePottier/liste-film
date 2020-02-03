@@ -19,7 +19,8 @@ $requete = $dbh->query($sql);
 echo"<ul>";
 // tant que c'est possible execute ma condition
 while($reqFilm=$requete->fetch(PDO::FETCH_ASSOC)){
-    echo '<li>'. $reqFilm['titre'].'<a href="modification.php?filmid='.$reqFilm["id"].'">Modifier</a> <a href="suppression.php?filmid='.$reqFilm["id"].'">Supprimer</a></li>';
+    echo '<li>'. $reqFilm['titre'].'<a href="modification.php?filmid='.$reqFilm["id"].'">Modifier</a> <a href="suppression.php?filmid2='.$reqFilm["id"].'">Supprimer</a></li>';
 }
 echo"</ul>";
 ?>
+<a href="ajout.php?filmajout">Ajouter un film</a>

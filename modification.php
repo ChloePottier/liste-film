@@ -47,7 +47,7 @@ if (!empty($_POST['titreModif'])){
     $reqModif ->execute(array($sqlModif));
     // si une modif est faite 
     if($reqModif == true){
-        header("Location: index.php");; 
+        header("Location: index.php");
     
     }
 }
