@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>Ajouter un film</title>
 </head>
 <body>
-    
-</body>
-</html>
+<h1>Ajouter un film à la liste</h1>
+
+
 <?php
 
 
@@ -26,12 +27,12 @@ try {
 }
 if(!empty($_POST['filmajout'])){
     $ajoutFilm = $_POST['filmajout'];
-    echo $ajoutFilm; //test si la valeur est bien envoyé en POST
+    // echo $ajoutFilm; //test si la valeur est bien envoyé en POST
+    // Mettre la valeur récupéré dans un tableau avec id car dans BDD il y a un id
     $tab = array(
         'id' => '',
         'titre'=>$ajoutFilm);
-        // $sqlAjout ="INSERT INTO film (titre) VALUES ".$_POST['filmajout']."";
-
+        //la requête doit comporter id et titre sinon ca ne marche pas
         $sqlAjout ="INSERT INTO film VALUES(:id, :titre)";
         $reqAjout = $dbh->prepare($sqlAjout);
         $reqAjout ->execute($tab);
@@ -45,3 +46,6 @@ if(!empty($_POST['filmajout'])){
 
 ?>
 <form method='POST' action='#'><input style = 'width: 300px;'name='filmajout' type='text' /> <button type='submit' value='submit' name='modification'>Ajouter</button></form>
+<a href='index.php'>Annuler la modification</a>
+</body>
+</html>

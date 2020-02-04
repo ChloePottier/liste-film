@@ -10,13 +10,11 @@ try {
     print "Erreur !: " . $e->getMessage() . "<br/>";
     die();
 }
+//normalement on devrait avoir un bouton "etes vous sur de vouloir supprimer le film....."
 //variable id du film
 $idFilm = $_GET['filmid2'];
 $sqlDelete = "DELETE FROM film  WHERE id = $idFilm  ";
-// var_dump($sqlDelete)
-// exécute la requête SQL 
-$dbh->query($sqlDelete);
-//resultat de la requete
+// exécute le résultat de la requête SQL 
 $reqDelete = $dbh->query($sqlDelete);
 // traiter le tableau : mettre le titre trouvé dans le input
 if($reqDelete == true){

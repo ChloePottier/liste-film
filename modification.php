@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Modifier un titre de film</title>
 </head>
 <body>
-    
-</body>
-</html>
+    <h1>Modifier un titre de film</h1>
+
 <?php
 $userBdd ='root';
 $pass ='';
@@ -54,3 +54,5 @@ if (!empty($_POST['titreModif'])){
 
 ?>
 <a href='index.php'>Annuler la modification</a>
+</body>
+</html>
