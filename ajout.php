@@ -24,12 +24,24 @@ try {
     print "Erreur !: " . $e->getMessage() . "<br/>";
     die();
 }
-$ajoutFilm = $_POST['filmajout'];
-$sqlAjout ="";
+if(!empty($_POST['filmajout'])){
+    $ajoutFilm = $_POST['filmajout'];
+    echo $ajoutFilm; //test si la valeur est bien envoyé en POST
+    $tab = array(
+        'id' => '',
+        'titre'=>$ajoutFilm);
+        // $sqlAjout ="INSERT INTO film (titre) VALUES ".$_POST['filmajout']."";
 
-// requete
-// INSERT INTO `film`( `titre`) VALUES ('Matrix 1') 
+        $sqlAjout ="INSERT INTO film VALUES(:id, :titre)";
+        $reqAjout = $dbh->prepare($sqlAjout);
+        $reqAjout ->execute($tab);
+        if($reqAjout == true){
+            header("Location: index.php"); 
+        } else {
+            echo "Ajout impossible";
+        }
+}
 
 
 ?>
-<form method='POST' action='#'><input style = 'width: 300px;'name='filmajout' type='text' /> <button type='submit' value='submit' name='modification'>Modifier</button></form>;
+<form method='POST' action='#'><input style = 'width: 300px;'name='filmajout' type='text' /> <button type='submit' value='submit' name='modification'>Ajouter</button></form>
