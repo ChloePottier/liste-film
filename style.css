@@ -11,20 +11,28 @@ h1{
     color: #fff;
     text-align: center;
 }
+.liste-film{
+    padding-top:5px; padding-bottom: 5px;
+}
 a{
     padding: 5px;
     background-color: #B30300;
     color: #fff;
     text-decoration: none; 
+    margin-left: 10px;
+}
+a:hover{
+    background-color: #FF8C00;
 }
 
 form{
     margin-bottom: 20px;
 }
 li{ padding-top:5px; padding-bottom: 5px; display: flex;}
-/* .btn-supprimer, .btn-modif{ } */
+.btn-ajouter{
+    background-color: #FF8C00;
+    margin-left: 40px;
+}
+.btn-ajouter:hover{background-color: #B30300;
 
-
-/* .btn-ajouter{
-
-} */
+}

@@ -33,7 +33,7 @@ $requete = $dbh->query($sql);
 echo"<ul>";
 // tant que c'est possible execute ma condition
 while($reqFilm=$requete->fetch(PDO::FETCH_ASSOC)){
-    echo '<li>'. $reqFilm['titre'].'<a href="modification.php?filmid='.$reqFilm["id"].'" class="btn-modif">Modifier</a> <a href="suppression.php?filmid2='.$reqFilm["id"].'" class="btn-supprimer">Supprimer</a></li>';
+    echo '<li><span class="liste-film">'. $reqFilm['titre'].'</span><a href="modification.php?filmid='.$reqFilm["id"].'" class="btn-modif">Modifier</a> <a href="suppression.php?filmid2='.$reqFilm["id"].'" class="btn-supprimer">Supprimer</a></li>';
 }
 echo"</ul>";
 ?>

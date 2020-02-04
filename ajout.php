@@ -9,11 +9,7 @@
 </head>
 <body>
 <h1>Ajouter un film à la liste</h1>
-
-
 <?php
-
-
 $userBdd ='root';
 $pass ='';
 //Connexion à la BDD en PDO
@@ -42,10 +38,8 @@ if(!empty($_POST['filmajout'])){
             echo "Ajout impossible";
         }
 }
-
-
 ?>
 <form method='POST' action='#'><input style = 'width: 300px;'name='filmajout' type='text' /> <button type='submit' value='submit' name='modification'>Ajouter</button></form>
-<a href='index.php'>Annuler la modification</a>
+<a href='index.php'>Annuler l'ajout</a>
 </body>
 </html>
