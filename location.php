@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>Location</title>
 </head>
 <body>
+<h1>Enregistrer une location</h1>
     <?php
     $userBdd ='root';
     $pass ='';
@@ -38,8 +40,7 @@
             $idClient = $_GET['id_client'];
             $dureeLoc = $_GET['dureeLoc'];
             $dateLoc = $_GET['dateLoc'];
-
-            echo $idFilm ." ".$idClient." ".$dureeLoc." ".$dateLoc;
+            // echo $idFilm ." ".$idClient." ".$dureeLoc." ".$dateLoc;
             $tab = array(
                 'id_film' => $idFilm,
                 'id_client'=>$idClient,
@@ -51,15 +52,15 @@
             $reqLoc = $dbh->prepare($sqlLoc);
             $reqLoc ->execute($tab);
             if($reqLoc == true){
-                echo "Location enregistré";
+                echo "Location enregistrée";
             } else {
                 echo "Impossible d'enregistrer la location";
             };
         };
     ?>
-
+    
     <form method="get" action="#">	
-    <select name="id_client">
+         <select name="id_client">
             <?php
             while($reqUserFinal=$reqUser->fetch(PDO::FETCH_ASSOC)){
                 echo '<option value="'. $reqUserFinal['id'].'" selected>'.$reqUserFinal['Nom']." " .$reqUserFinal['Prenom'].'</option> ';
@@ -75,5 +76,7 @@
         <input type="date" name="dateLoc">
         <button type="submit" value="Louer">Louer</button>
     </form>
+    <a href="all-locations.php">Afficher toutes les locations</a>
+
 </body>
 </html>
