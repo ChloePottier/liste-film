@@ -43,29 +43,69 @@ try {
         $reqDuree = $dbh->query($sqlDuree);
 
 
+
 ?>
 
     <div>
+    <form action="" method="get">
         <select name="id_client">
+        <option value="" selected>Sélectionner un client</option>
             <?php
             while($reqUserFinal=$reqUser->fetch(PDO::FETCH_ASSOC)){
-                echo '<option value="'. $reqUserFinal['id'].'" selected>'.$reqUserFinal['Nom']." " .$reqUserFinal['Prenom'].'</option> ';
+                echo '<option value="'. $reqUserFinal['id'].'" >'.$reqUserFinal['Nom']." " .$reqUserFinal['Prenom'].'</option> ';
             }
             ?>
         </select>
         <select name="id_film">
+        <option value="" selected>Sélectionner un film</option>
             <?php while($reqFilmFinal=$reqFilm->fetch(PDO::FETCH_ASSOC)){
-                echo '<option value="'. $reqFilmFinal['id'].'" selected>'.$reqFilmFinal["titre"].'</option> ';
+                echo '<option value="'. $reqFilmFinal['id'].'">'.$reqFilmFinal["titre"].'</option> ';
             }?>
         </select>
         <select name="dureeLoc">
+        <option value=""selected>Sélectionner une durée</option>
             <?php while($reqDureeFinal=$reqDuree->fetch(PDO::FETCH_ASSOC)){
-                echo '<option value="'. $reqDureeFinal['Duree'].'" selected>'.$reqDureeFinal["Duree"].'</option> ';
+                echo '<option value="'. $reqDureeFinal['Duree'].'">'.$reqDureeFinal["Duree"].'</option> ';
             }
             ?>
         </select>
+        <label for="dateDebut">Date début</label>
+        <input type="date" name="dateDebLoc">
+        <label for="dateFin">Date fin</label>
+        <input type="date" name="dateFinLoc">
+        <button type="submit" value="filtrer">Chercher</button>
+    </form>
 
-        <?php ?>
+
+
+        <?php 
+               if (!empty($_GET['id_client'])){
+                 // requete afficher tous les films disponibles
+                $sqlUserSelect = "SELECT Nom, Prenom, titre, date_debut_location, Duree FROM client 
+                INNER JOIN location ON location.id_client = client.id
+                JOIN film ON film.id = location.id_film
+                WHERE client.id=".$_GET['id_client'].""; 
+                //exécute la requête SQL 
+                $dbh->query($sqlUserSelect);
+                //resultat de la requete
+                $reqUserSelect = $dbh->query($sqlUserSelect);
+               
+                echo '<ul> <span> Le client '.$_GET['id_client'].' a loué : </span><br />';
+                while($reqUserFinalSelect=$reqUserSelect->fetch(PDO::FETCH_ASSOC)){
+                //Calcul date de fin : la première étape est de transformer la date de début en timestamp
+                $dateDepartTimestamp = strtotime($reqUserFinalSelect['date_debut_location']);
+                //on calcule la date de fin = date début + duree
+                 $dateFin = date('Y-m-d', strtotime('+'.$reqUserFinalSelect['Duree'].'day', $dateDepartTimestamp ));
+                    echo '<li>'.$reqUserFinalSelect['titre'].', le '.$reqUserFinalSelect['date_debut_location'].' pendant '.$reqUserFinalSelect['Duree'].' jours, donc jusqu\'au : '.$dateFin.'</li>';
+                }
+                echo '</ul>';
+            } else if(!empty($_GET['id_film'])){
+
+            }
+
+        
+        
+        ?>
     </div>
 </body>
 </html>
